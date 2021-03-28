@@ -14,7 +14,7 @@ sudo nmap -sC -sV -oN initial 10.10.121.100 && sudo nmap -T5 -p- -oN allports 10
 ### Output:
 Detailed scan of the top 1000 ports:
 
-![Pasted image 20210327195457.png]
+![Pasted image 20210327195457.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327195457.png)
 
 Quick scan of all 65,535 (TCP) ports:
 
