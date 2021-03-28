@@ -1,4 +1,4 @@
-This is my writeup of the Simple CTF room on TryHackMe. This box utilizes a CVE within the Simple CMS application (hence the name) to gain the initial foothold and then a SUID abuse for the privilege escalation.
+This is my writeup of the [Simple CTF](https://tryhackme.com/room/easyctf) room on TryHackMe. This box utilizes a CVE within the Simple CMS application (hence the name) to gain the initial foothold and then a SUID abuse for the privilege escalation.
 
 Let's get started!
 
