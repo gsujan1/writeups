@@ -18,7 +18,7 @@ Detailed scan of the top 1000 ports:
 
 Quick scan of all 65,535 (TCP) ports:
 
-![Pasted image 20210327195629.png]
+![Pasted image 20210327195629.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327195629.png)
 
 *Aside: I've begun to use rustscan for the allports scan as the speed at which it scans ports seems orders of magnitudes faster than nmap. I highly reccomend checking it out, especially for scans of all possible ports.*
 
@@ -32,15 +32,15 @@ So first up, that FTP server, which nmap conveniently tells us allows anonymous 
 
 Logging into the FTP server as anonymous and listing the directories/files shows us a "pub" directory:
 
-![Pasted image 20210327200815.png]
+![Pasted image 20210327200815.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327200815.png)
 
 Moving into the "pub" directory shows us a juicy looking file:
 
-![Pasted image 20210327200929.png]
+![Pasted image 20210327200929.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327200929.png)
 
 Downloading the file to our machine and reading it shows us a note from an (annoyed) sysadmin regarding a dev's weak password:
 
-![Pasted image 20210327201124.png]
+![Pasted image 20210327201124.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327201124.png)
 
 So we now have a potential user (mitch) as well as a clue that this user reuses his password. We'll keep this in the back of our mind for now...
 
@@ -53,7 +53,7 @@ Nmap again proves to be a time saver here by showing us two things:
 
 Browsing to the robots.txt page shows us there is one disallowed directory:
 
-![Pasted image 20210327202144.png]
+![Pasted image 20210327202144.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327202144.png)
 
 However, trying to browse to this directory gives us a 404 Not Found, so this looks like a dead end.
 
@@ -61,21 +61,21 @@ Since our manual enumeration hasn't turned up anything too noteworthy, let's sta
 
 Feroxbuster output:
 
-![Pasted image 20210327202544.png]
+![Pasted image 20210327202544.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327202544.png)
 
 Well, it looks like the name of the box is starting to make more sense! Browsing to the /simple directory brings us to the homepage of the "CMS Made Simple" site. After scrolling through and exploring the site for anything interesting, we find the specific version:
 
-![Pasted image 20210327202753.png]
+![Pasted image 20210327202753.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327202753.png)
 
 Doing a quick searchsploit for "CMS Made Simple" shows us this service has had quite a few CVEs. Looking closer, we see an exploit made for a version immediately after ours, which means it's a solid bet to assume the exploit works. (This is also indicated by searcsploit):
 
-![Pasted image 20210327203156.png]
+![Pasted image 20210327203156.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327203156.png)
 
 Looking through the script, we see it seems to be using a time-based blind SQL injection attack that seems to query the database. Basically, a request is sent via a pre-crafted malicious URL and we can verify whether the result of our query is TRUE or FALSE based on the response time. Specifically, this exploit seems to spam every possible character in an attempt to enumerate user information such as name, email, salt, and hash of the password which is incredibly cool.
 
 Great, let's run this baby and get some creds!
 
-![Pasted image 20210327203902.png]
+![Pasted image 20210327203902.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327203902.png)
 
 Well, it looks like the tool was written in python2, indicated by the error thrown by the interpreter around the use of quotes without parentheses. 
 
@@ -93,7 +93,7 @@ python2 exploit.py -u https://10.10.121.100/simple/ -c -w /usr/share/wordlists/r
 
 Output of this (pretty much) autopwn script:
 
-![Pasted image 20210327214000.png]
+![Pasted image 20210327214000.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327214000.png)
 
 ---
 
@@ -102,28 +102,28 @@ Trying the creds on the admin login page fails so let's try using these creds ot
 
 Logging in as mitch via SSH on port 2222, we get the user.txt flag: 
 
-![Pasted image 20210327205621.png]
+![Pasted image 20210327205621.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327205621.png)
 
 ---
 
 # Privilege Escalation
 The first thing I like to do on Linux boxes is to look for any commands we can run as root with the ```sudo -l``` command.
 
-![Pasted image 20210327214552.png]
+![Pasted image 20210327214552.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327214552.png)
 
 We can run Vim as root, and we don't even need to enter a password!
 
 I know we can run a shell from Vim, so let's create a new file (as root) with Vim and try calling a shell from within it:
 
-![Pasted image 20210327214826.png]
+![Pasted image 20210327214826.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327214826.png)
 
 And we're root!
 
-![Pasted image 20210327214857.png]
+![Pasted image 20210327214857.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327214857.png)
 
 Nice, looking the /root directory, we find our flag:
 
-![Pasted image 20210327214945.png]
+![Pasted image 20210327214945.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327214945.png)
 
 ---
 
