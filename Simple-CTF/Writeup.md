@@ -48,7 +48,7 @@ Nothing else seems to come from the FTP server, and looking up vulnerabilities f
 
 ## http server
 Nmap again proves to be a time saver here by showing us two things:
-1. That the web server is just serving the default apache "it works."
+1. That the web server is just serving the default apache "it works!" page.
 2. The site has a "/robots.txt" page we can look for interesting directories the site owner's do not want web crawlers to see.
 
 Browsing to the robots.txt page shows us there is one disallowed directory:
