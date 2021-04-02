@@ -98,7 +98,7 @@ Output of this (pretty much) autopwn script:
 ---
 
 # Initial Foothold
-Trying the creds on the admin login page fails so let's try using these creds other places like the ssh server since we know that mitch, who we just got creds for, likes to reuse his password.
+Trying the creds on the admin login page fails so let's try using these creds in other places like the ssh server since we know that mitch, who we just got creds for, likes to reuse his password.
 
 Logging in as mitch via SSH on port 2222, we get the user.txt flag: 
 
