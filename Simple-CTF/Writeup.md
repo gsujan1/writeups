@@ -67,7 +67,7 @@ Well, it looks like the name of the box is starting to make more sense! Browsing
 
 ![Pasted image 20210327202753.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327202753.png)
 
-Doing a quick searchsploit for "CMS Made Simple" shows us this service has had quite a few CVEs. Looking closer, we see an exploit made for a version immediately after ours, which means it's a solid bet to assume the exploit works. (This is also indicated by searcsploit):
+Doing a quick searchsploit for "CMS Made Simple" shows us this service has had quite a few CVEs. Looking closer, we see an exploit made for a version immediately after ours, which means it's a solid bet to assume the exploit works. (This is also indicated by searchsploit):
 
 ![Pasted image 20210327203156.png](https://github.com/gsujan1/writeups/blob/main/Simple-CTF/Pasted%20image%2020210327203156.png)
 
